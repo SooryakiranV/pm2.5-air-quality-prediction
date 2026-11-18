@@ -1,68 +1,37 @@
-# PM2.5 Air Quality Prediction Using Machine Learning
+# PM2.5 Air Quality Prediction
 
-This project predicts PM2.5 air pollution concentrations using global meteorological and environmental data.
+A four-person group project that compares regression models for PM2.5 prediction.
 
-The project follows the CRISP-DM framework and compares five machine learning models:
-
-- Linear Regression
-- Ridge Regression
-- Random Forest
-- Support Vector Regression (SVR)
-- XGBoost
-
-The study investigates the contribution of meteorological variables, engineered features, and pollutant co-features to PM2.5 prediction accuracy.
-
-## Dataset
-
-Global Weather Repository Dataset
-
-- 120,432 observations
-- 41 features
-- Global weather station data
-
-## Methodology
-
-### Data Preprocessing
-
-- Sensor error correction
-- Missing value imputation
-- Outlier treatment using Winsorization
-- Log transformation of PM2.5
-- VIF-based multicollinearity removal
-
-### Feature Engineering
-
-- Wind vector decomposition
-- Pressure anomaly feature
-- Heat stress index
-- Weather condition encoding
-
-## Models Evaluated
-
-1. Linear Regression
-2. Ridge Regression
-3. Random Forest
-4. Support Vector Regression (RBF)
-5. XGBoost
+![CRISP-DM project pipeline](crisp_dm_pipeline.png)
 
 ## Results
 
-| Model | Test R² |
-|---------|---------|
+All R² values below are in log(1 + PM2.5) space.
+
+| Model | R² |
+|---|---:|
 | Linear Regression | 0.4183 |
 | Ridge Regression | 0.4183 |
 | Random Forest | 0.6566 |
 | SVR | 0.6993 |
 | XGBoost | 0.7749 |
 
-## Key Findings
+Meteorology-only XGBoost achieved an R² of about 0.40.
 
-- XGBoost achieved the best predictive performance with R² = 0.7749.
-- Meteorological variables alone explained approximately 40% of PM2.5 variance.
-- Pollutant co-features significantly improved model performance.
-- Feature engineering and preprocessing substantially improved prediction accuracy.
-- SHAP analysis identified Carbon Monoxide as the most influential predictor.
+The evaluation used a random 80/20 split. Locations can appear in both training and test data, so these results may not represent performance on unseen locations.
 
-## Pipeline
+## Run
 
-![Pipeline](crisp_dm_pipeline.png)
+This is a notebook-only project. The notebook expects `GlobalWeatherRepository.csv` at `/content/GlobalWeatherRepository.csv` and writes outputs under `/content/outputs`. The data file is not included.
+
+In Google Colab, upload the dataset to that path, then run:
+
+```sh
+python -m pip install -r requirements.txt
+```
+
+Open `Data_Mining_71.ipynb` in Colab and run the cells in order.
+
+## Topics
+
+air-quality, pm2-5, regression, machine-learning, xgboost, group-project
